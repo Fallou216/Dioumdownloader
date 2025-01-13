@@ -63,9 +63,21 @@
             '<p class="message error">Veuillez entrer un lien valide.</p>';
           return;
         }
+
+        let progress = 0;
+        const interval = setInterval(() => {
+          if (progress < 100) {
+            progress += 10; // Simule une progression par incréments de 10%
+            updateProgress(progress);
+          } else {
+            clearInterval(interval);
+          }
+        }, 500); // Mise à jour toutes les 500 ms
+
         messageDiv.innerHTML = `
                 <p class="message waiting">
                     Vidéo en attente de téléchargement, veuillez patienter... 
+                    <span id="progress">0%</span>
                     <i class="fas fa-spinner fa-spin"></i>
                 </p>`;
 
@@ -76,18 +88,35 @@
         })
           .then((response) => response.json())
           .then((data) => {
+            clearInterval(interval); // Arrête la simulation de progression
+
             if (data.status === "error") {
               messageDiv.innerHTML = `<p class="message error">Erreur : ${data.message}</p>`;
             } else {
               messageDiv.innerHTML = `
                             <p class="message success">Téléchargement réussi ! 
-                                <a href="${data.download_url}" target="_blank">Cliquez ici pour télécharger</a>
+                                <a href="${data.download_url}" target="_blank" onclick="restartPage()">Cliquez ici pour télécharger</a>
                             </p>`;
             }
           })
           .catch((error) => {
+            clearInterval(interval);
             messageDiv.innerHTML = `<p class="message error">Erreur : ${error.message}</p>`;
           });
+      }
+
+      function updateProgress(progress) {
+        const progressElement = document.getElementById("progress");
+        if (progressElement) {
+          progressElement.textContent = `${progress}%`;
+        }
+      }
+
+      // Fonction pour redémarrer la page
+      function restartPage() {
+        setTimeout(() => {
+          window.location.reload();
+        }, 500); // Redémarre la page après un délai de 500 ms
       }
     </script>
   </body>
