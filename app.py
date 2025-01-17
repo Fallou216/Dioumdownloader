@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
-import os
 import yt_dlp
+import os
 
 app = Flask(__name__)
 
@@ -32,7 +32,7 @@ def download_video():
         if not video_url:
             return jsonify({'status': 'error', 'message': 'Aucun lien fourni.'}), 400
 
-        # Options de téléchargement avec yt-dlp et les cookies
+        # Options de téléchargement avec yt-dlp
         ydl_opts = {
             'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(title)s.%(ext)s'),
             'format': 'bestvideo+bestaudio/best',  # Télécharger la meilleure qualité vidéo et audio
@@ -42,8 +42,11 @@ def download_video():
                 'key': 'FFmpegVideoConvertor',
                 'preferedformat': 'mp4',  # Format de sortie souhaité
             }],
-            'cookies': 'cookies.txt',  # Chemin vers votre fichier cookies
         }
+
+        # Vérification spécifique pour TikTok
+        if 'tiktok.com' in video_url:
+            ydl_opts['outtmpl'] = os.path.join(DOWNLOAD_FOLDER, 'tiktok_%(id)s.%(ext)s')  # Nommage spécifique pour TikTok
 
         # Télécharger la vidéo
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:

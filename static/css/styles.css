@@ -16,6 +16,7 @@ body {
     align-items: center;
     height: 100vh;
     background-image: linear-gradient(135deg, #2c3e50, #4ca1af);
+    margin: 0;
 }
 
 /* Conteneur principal */
@@ -32,7 +33,7 @@ body {
 
 /* Titre principal */
 h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-bottom: 20px;
     font-weight: 700;
     color: #ecf0f1;
@@ -67,6 +68,7 @@ p {
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 input[type="text"] {
@@ -79,6 +81,7 @@ input[type="text"] {
     color: #fff;
     outline: none;
     transition: all 0.3s ease;
+    margin-bottom: 10px;
 }
 
 input[type="text"]:focus {
@@ -95,12 +98,14 @@ input[type="text"]:focus {
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.3s ease;
+    margin-top: 10px;
 }
 
 #paste-btn:hover {
     background-color: #2980b9;
 }
 
+/* Bouton Télécharger */
 .download-btn {
     padding: 12px 30px;
     background-color: #28a745;
@@ -111,6 +116,7 @@ input[type="text"]:focus {
     font-size: 1rem;
     transition: background-color 0.3s ease;
     margin-top: 10px;
+    width: 100%;
 }
 
 .download-btn:hover {
@@ -147,5 +153,49 @@ input[type="text"]:focus {
     }
     to {
         opacity: 1;
+    }
+}
+
+/* Styles pour les petits écrans */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    .social-icons i {
+        font-size: 1.5rem;
+    }
+
+    .input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    input[type="text"] {
+        width: 100%;
+    }
+
+    .download-btn {
+        width: 100%;
+        font-size: 1.1rem;
+    }
+}
+
+/* Styles pour les très petits écrans */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .social-icons i {
+        font-size: 1.3rem;
+    }
+
+    .download-btn {
+        font-size: 1.2rem;
     }
 }
