@@ -1,0 +1,10 @@
+GPS	1	.youtube.com	/	2025-01-17T11:21:26.866Z	4	✓	✓				Medium	
+VISITOR_INFO1_LIVE	W0w0lVC5GEA	.youtube.com	/	2025-07-16T10:51:26.866Z	29	✓	✓	None	https://youtube.com		Medium	
+VISITOR_PRIVACY_METADATA	CgJTThIEGgAgXw%3D%3D	.youtube.com	/	2025-07-16T10:51:26.866Z	44	✓	✓	None	https://youtube.com		Medium	
+YSC	RCwaQC6fWZE	.youtube.com	/	Session	14	✓	✓	None	https://youtube.com		Medium	
+__Secure-ROLLOUT_TOKEN	CKeZnvKgktL3_wEQ_4_rrNj8igMY_4_rrNj8igM%3D	.youtube.com	/	2025-07-16T10:51:26.866Z	64	✓	✓	None	https://youtube.com		Medium	
+GPS	1	.youtube.com	/	2025-01-17T11:21:26.866Z	4	✓	✓				Medium	
+VISITOR_INFO1_LIVE	W0w0lVC5GEA	.youtube.com	/	2025-07-16T10:51:26.866Z	29	✓	✓	None	https://youtube.com		Medium	
+VISITOR_PRIVACY_METADATA	CgJTThIEGgAgXw%3D%3D	.youtube.com	/	2025-07-16T10:51:26.866Z	44	✓	✓	None	https://youtube.com		Medium	
+YSC	RCwaQC6fWZE	.youtube.com	/	Session	14	✓	✓	None	https://youtube.com		Medium	
+__Secure-ROLLOUT_TOKEN	CKeZnvKgktL3_wEQ_4_rrNj8igMY_4_rrNj8igM%3D	.youtube.com	/	2025-07-16T10:51:26.866Z	64	✓	✓	None	https://youtube.com		Medium	

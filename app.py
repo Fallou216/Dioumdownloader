@@ -42,7 +42,7 @@ def download_video():
                 'key': 'FFmpegVideoConvertor',
                 'preferedformat': 'mp4',  # Format de sortie souhaité
             }],
-            'cookies': 'path/to/your/cookies.txt',  # Chemin vers votre fichier cookies
+            'cookies': 'cookies.txt',  # Chemin vers votre fichier cookies
         }
 
         # Télécharger la vidéo
