@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dioumdownloader</title>
+    <!-- Font Awesome pour les icônes -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1><i class="fas fa-download"></i> Dioumdownloader</h1>
+      <p>Téléchargez des vidéos depuis vos plateformes préférées :</p>
+      <div class="social-icons">
+        <i class="fab fa-youtube"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-snapchat"></i>
+        <i class="fab fa-tiktok"></i>
+        <i class="fab fa-twitter"></i>
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          id="video-url"
+          placeholder="Collez le lien de la vidéo ici..."
+        />
+        <button id="paste-btn" onclick="pasteURL()">
+          <i class="fas fa-paste"></i> Coller
+        </button>
+      </div>
+      <button class="download-btn" onclick="downloadVideo()">
+        <i class="fas fa-cloud-download-alt"></i> Télécharger
+      </button>
+      <div class="message" id="message"></div>
+    </div>
+
+    <script>
+      // Fonction pour coller le texte du presse-papiers
+      function pasteURL() {
+        navigator.clipboard
+          .readText()
+          .then((text) => {
+            document.getElementById("video-url").value = text;
+          })
+          .catch((err) => {
+            alert("Impossible d'accéder au presse-papiers : " + err);
+          });
+      }
+
+      function downloadVideo() {
+        const url = document.getElementById("video-url").value;
+        const messageDiv = document.getElementById("message");
+
+        if (!url) {
+          messageDiv.innerHTML =
+            '<p class="message error">Veuillez entrer un lien valide.</p>';
+          return;
+        }
+
+        let progress = 0;
+        const interval = setInterval(() => {
+          if (progress < 100) {
+            progress += 10; // Simule une progression par incréments de 10%
+            updateProgress(progress);
+          } else {
+            clearInterval(interval);
+          }
+        }, 500); // Mise à jour toutes les 500 ms
+
+        messageDiv.innerHTML = `
+                <p class="message waiting">
+                    Vidéo en attente de téléchargement, veuillez patienter... 
+                    <span id="progress">0%</span>
+                    <i class="fas fa-spinner fa-spin"></i>
+                </p>`;
+
+        fetch("/download", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url })
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            clearInterval(interval); // Arrête la simulation de progression
+
+            if (data.status === "error") {
+              messageDiv.innerHTML = `<p class="message error">Erreur : ${data.message}</p>`;
+            } else {
+              messageDiv.innerHTML = `
+                            <p class="message success">Téléchargement réussi ! 
+                                <a href="${data.download_url}" target="_blank" onclick="restartPage()">Cliquez ici pour télécharger</a>
+                            </p>`;
+            }
+          })
+          .catch((error) => {
+            clearInterval(interval);
+            messageDiv.innerHTML = `<p class="message error">Erreur : ${error.message}</p>`;
+          });
+      }
+
+      function updateProgress(progress) {
+        const progressElement = document.getElementById("progress");
+        if (progressElement) {
+          progressElement.textContent = `${progress}%`;
+        }
+      }
+
+      // Fonction pour redémarrer la page
+      function restartPage() {
+        setTimeout(() => {
+          window.location.reload();
+        }, 500); // Redémarre la page après un délai de 500 ms
+      }
+    </script>
+  </body>
+</html>
