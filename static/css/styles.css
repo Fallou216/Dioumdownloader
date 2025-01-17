@@ -16,7 +16,6 @@ body {
     align-items: center;
     height: 100vh;
     background-image: linear-gradient(135deg, #2c3e50, #4ca1af);
-    margin: 0;
 }
 
 /* Conteneur principal */
@@ -33,7 +32,7 @@ body {
 
 /* Titre principal */
 h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 20px;
     font-weight: 700;
     color: #ecf0f1;
@@ -68,7 +67,7 @@ p {
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
-    flex-wrap: wrap;
+    flex-wrap: wrap;  /* Permet de gérer le comportement sur petits écrans */
 }
 
 input[type="text"] {
@@ -84,11 +83,6 @@ input[type="text"] {
     margin-bottom: 10px;
 }
 
-input[type="text"]:focus {
-    border-color: #28a745;
-    background-color: rgba(40, 167, 69, 0.1);
-}
-
 #paste-btn {
     padding: 12px 20px;
     background-color: #3498db;
@@ -98,14 +92,14 @@ input[type="text"]:focus {
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.3s ease;
-    margin-top: 10px;
+    margin-left: -1px;
+    flex-shrink: 0;  /* Empêche le bouton de rétrécir sur petits écrans */
 }
 
 #paste-btn:hover {
     background-color: #2980b9;
 }
 
-/* Bouton Télécharger */
 .download-btn {
     padding: 12px 30px;
     background-color: #28a745;
@@ -116,7 +110,6 @@ input[type="text"]:focus {
     font-size: 1rem;
     transition: background-color 0.3s ease;
     margin-top: 10px;
-    width: 100%;
 }
 
 .download-btn:hover {
@@ -156,46 +149,55 @@ input[type="text"]:focus {
     }
 }
 
-/* Styles pour les petits écrans */
-@media (max-width: 768px) {
+/* Médias Queries pour adapter le design sur petits écrans */
+@media screen and (max-width: 768px) {
+    /* Ajustement du titre */
+    h1 {
+        font-size: 2rem; /* Réduit la taille du titre sur les petits écrans */
+    }
+
+    /* Icônes des réseaux sociaux */
+    .social-icons i {
+        font-size: 1.5rem; /* Réduit la taille des icônes */
+    }
+
+    /* Adaptation des champs de saisie */
+    .input-group {
+        flex-direction: column; /* Aligne l'input et le bouton sur une colonne */
+    }
+
+    input[type="text"] {
+        width: 100%; /* Champ texte occupe toute la largeur */
+        margin-bottom: 10px; /* Ajoute un petit espace sous l'input */
+    }
+
+    #paste-btn {
+        width: 100%; /* Bouton occupe toute la largeur sur petits écrans */
+        border-radius: 25px; /* Pour un effet plus arrondi sur petits écrans */
+        margin-left: 0; /* Enlève l'espacement à gauche */
+        margin-top: 10px; /* Ajoute un espacement entre l'input et le bouton */
+    }
+
+    .download-btn {
+        width: 100%; /* Bouton télécharger occupe toute la largeur */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Ajuste encore plus les éléments pour les très petits écrans */
     h1 {
         font-size: 1.8rem;
     }
 
-    p {
-        font-size: 0.9rem;
-    }
-
     .social-icons i {
-        font-size: 1.5rem;
+        font-size: 1.2rem; /* Réduit encore plus la taille des icônes */
     }
 
     .input-group {
-        flex-direction: column;
-        align-items: stretch;
+        margin-bottom: 15px;
     }
 
-    input[type="text"] {
-        width: 100%;
-    }
-
-    .download-btn {
-        width: 100%;
-        font-size: 1.1rem;
-    }
-}
-
-/* Styles pour les très petits écrans */
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.6rem;
-    }
-
-    .social-icons i {
-        font-size: 1.3rem;
-    }
-
-    .download-btn {
-        font-size: 1.2rem;
+    input[type="text"], #paste-btn, .download-btn {
+        font-size: 0.9rem; /* Réduit la taille du texte dans les champs */
     }
 }
